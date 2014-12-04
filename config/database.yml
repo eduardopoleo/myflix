@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: myflix_development
+  pool: 5
+  username: eduardo
+  password: foxa3igu
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: myflix_test
+  pool: 5
+  username: eduardo
+  password: foxa3igu
