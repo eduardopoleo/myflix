@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def require_user
     if !logged_in?
       flash[:error] = "Access reserved for members only please sign in!"
-      redirect_to root_path
+      redirect_to signin_path
     end
   end
 end

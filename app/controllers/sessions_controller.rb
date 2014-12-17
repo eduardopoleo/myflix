@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to home_path, notice: 'You are signed in, enjoy!'
     else
-      flash[:error] = "Email or password do not match"
-      redirect_to signin_path
+      redirect_to signin_path, notice: 'Your password or email are incorrect'
     end
   end
 
