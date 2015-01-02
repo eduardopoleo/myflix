@@ -11,7 +11,14 @@ class QueueItemsController < ApplicationController
     redirect_to queue_items_path
   end
 
+  def destroy
+    item = QueueItem.find(params[:id])
+    item.destroy if current_user.queue_items.include?(item)
+    redirect_to queue_items_path
+  end
+
   private
+  #These are method that can not actually be routed.
   def queue_items_count
     current_user.queue_items.count + 1
   end
