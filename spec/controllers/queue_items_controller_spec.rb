@@ -1,0 +1,82 @@
+require 'spec_helper'
+
+describe QueueItemsController do
+
+  
+  describe 'GET index' do
+    context 'With authenticated users' do
+      let (:current_user ) {Fabricate(:user)} 
+      before {session[:user_id] = current_user.id}
+
+      it 'sets the @queue_items variable' do
+        video1 = Fabricate(:video)
+        video2 = Fabricate(:video)
+        item1 = Fabricate(:queue_item, user: current_user, video: video1)
+        item2 = Fabricate(:queue_item, user: current_user, video: video2)
+        get :index
+        expect(assigns(:queue_items)).to match_array([item1, item2])
+      end
+
+      it 'renders the index template' do
+        get :index
+        expect(response).to render_template :index
+      end
+    end
+  end
+
+  describe 'POST create' do
+    context 'Authenticated users' do
+      let(:current_user) {Fabricate(:user)}
+      before do
+        session[:user_id] = current_user.id
+      end
+
+      it 'redirects to the queue page' do
+        video = Fabricate(:video)
+        post :create, video_id: video.id
+        expect(response).to redirect_to queue_items_path
+      end
+
+      it 'creates a queue item' do
+        video = Fabricate(:video)
+        post :create, video_id: video.id  
+        expect(QueueItem.count).to eq(1)
+      end
+
+      it 'creates the queue item associated with the video' do
+        video = Fabricate(:video, title: 'good video')
+        post :create, video_id: video.id
+        expect(QueueItem.first.video).to eq(video)
+      end
+
+      it 'creates the queue item associated with the current user' do
+        video = Fabricate(:video, title: 'good video')
+        post :create, video_id: video.id
+        expect(QueueItem.first.user).to eq(current_user)
+      end
+
+      it 'puts the video as the last one in the queue' do
+        video1 = Fabricate(:video)
+        Fabricate(:queue_item, video: video1, user: current_user)
+        video2 = Fabricate(:video)
+        post :create, video_id: video2.id
+        expect(video2.queue_items.first.order).to eq(2)
+      end
+
+      it 'does not add a video twice to the queue' do
+        video1 = Fabricate(:video)
+        Fabricate(:queue_item, video: video1, user: current_user)
+        post :create, video_id: video1.id
+        expect(QueueItem.count).to eq(1)
+      end
+    end
+
+    it 'redirects to the signin path for unauthenticated users' do
+      video = Fabricate(:video)
+      post :create, video_id: video.id
+      expect(response).to redirect_to signin_path
+    end
+  end
+end
+
+
