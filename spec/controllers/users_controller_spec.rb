@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+
   describe 'GET new' do
     it 'sets the new object @user' do
       get :new

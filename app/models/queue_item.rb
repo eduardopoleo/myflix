@@ -2,6 +2,7 @@ class QueueItem < ActiveRecord::Base
   belongs_to :video
   belongs_to :user
   validates :video_id, presence: true
+  validates_numericality_of :order, {only_integer: true}
  
   def display_title 
     video.title 
