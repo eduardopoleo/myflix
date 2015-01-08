@@ -42,7 +42,7 @@ class QueueItemsController < ApplicationController
     ActiveRecord::Base.transaction do
       params[:queue_items].each do |item| 
         modified_item = QueueItem.find(item[:id])
-        modified_item.update_attributes!(order: item[:order]) if modified_item.user == current_user
+        modified_item.update_attributes!(order: item[:order], rating: item[:rating]) if modified_item.user == current_user
       end
     end
   end

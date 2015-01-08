@@ -24,7 +24,8 @@
                     = link_to item.display_title, video_path(item.video)
                   %td
                     = button_to "Play", nil, class: "btn btn-default"
-                  %td= item.rating
+                  %td
+                    =f.select(:'queue_items[][rating]', [["5 Stars", 5], ["4 Stars", 4], ['3 Stars', 3], ['2 Stars', 2], ['1 Star', 1]], hide_label: true, include_blank: true, selected: item.rating) 
                   %td
                     = link_to item.display_genre, category_path(item.video.category) 
                   %td
