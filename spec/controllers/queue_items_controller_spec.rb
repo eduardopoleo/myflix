@@ -19,7 +19,7 @@ describe QueueItemsController do
         get :index
         expect(response).to render_template :index
       end
-
+      
       it_behaves_like 'require_sign_in' do
         let(:action) {get :index}
       end
@@ -69,11 +69,10 @@ describe QueueItemsController do
         post :create, video_id: video1.id
         expect(QueueItem.count).to eq(1)
       end
-    end
 
-    it_behaves_like 'require_sign_in' do
-      video = Fabricate(:video)
-      let(:action) {post :create}
+      it_behaves_like 'require_sign_in' do
+        let(:action) {post :create, video_id: 3}
+      end
     end
   end
 
@@ -113,20 +112,11 @@ describe QueueItemsController do
         expect(QueueItem.count).to eq(1)
       end
     end
-
-    it 'redirects to the signin path if the user is not authenticated' do
-       video = Fabricate(:video)
-       item = Fabricate(:queue_item, video: video)
-       delete :destroy, id: item.id
-       expect(response).to redirect_to signin_path
-    end
-
+        
     it_behaves_like 'require_sign_in' do
-      video = Fabricate(:video)
-      item = Fabricate(:queue_item, video: video)
-      let(:action) {delete :destroy, id: item.id}
+      let(:action) {delete :destroy, id: 4}
     end
-  end
+end
 
   describe 'POST update queue items' do
     context 'with valid inputs' do
@@ -194,7 +184,7 @@ describe QueueItemsController do
     end
 
     it_behaves_like 'require_sign_in' do
-      let(:action) {post :update_queue}
+      let(:action) {post :update_queue, id: 4, order: 2}
     end
   end
 end

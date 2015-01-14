@@ -19,13 +19,13 @@
                 %tr
                   %td
                     = hidden_field_tag :"queue_items[][id]", "#{item.id}"
-                    = f.text_field :"queue_items[][order]", hide_label: :true, value: "#{item.order}"
+                    = f.text_field :"queue_items[][order]", hide_label: :true, value: "#{item.order}", data: {video_id: item.video.id}
                   %td
                     = link_to item.display_title, video_path(item.video)
                   %td
                     = button_to "Play", nil, class: "btn btn-default"
                   %td
-                    =f.select(:'queue_items[][rating]', [["5 Stars", 5], ["4 Stars", 4], ['3 Stars', 3], ['2 Stars', 2], ['1 Star', 1]], hide_label: true, include_blank: true, selected: item.rating) 
+                    = f.select(:'queue_items[][rating]', options_for_video_rating, hide_label: true, include_blank: true, selected: item.rating) 
                   %td
                     = link_to item.display_genre, category_path(item.video.category) 
                   %td
