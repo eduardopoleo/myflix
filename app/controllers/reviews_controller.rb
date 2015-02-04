@@ -4,6 +4,12 @@ class ReviewsController < ApplicationController
   def create
     @video = Video.find(params[:video_id])
     @review = @video.reviews.build(review_params.merge!(user: current_user))
+    #This would be equivlent of saying
+    #@review = Review.new(review_params)
+    #@review.video = @video
+    #@review.user = current_user 
+    # The build shortens the assotiation and the merge! just mergers the params
+    
     if @review.save 
       redirect_to @video
     else

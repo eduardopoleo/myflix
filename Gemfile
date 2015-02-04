@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.4'
 
 gem 'bootstrap-sass'
 gem 'coffee-rails'
@@ -29,9 +29,10 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do
   gem 'rails_12factor'
 end
-

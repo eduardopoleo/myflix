@@ -4,27 +4,31 @@
       %article
         %header
           %h2 My Queue
-        %table.table
-          %thead
-            %tr
-              %th(width="10%") List Order
-              %th(width="30%") Video Title
-              %th(width="10%") Play
-              %th(width="20%") Rating
-              %th(width="15%") Genre
-              %th(width="15%") Remove
-          %tbody
-            - @queue_items.each do |item|
+        = bootstrap_form_tag url: '/update_queue' do |f|
+          %table.table
+            %thead
               %tr
-                %td= item.order
-                %td
-                  = link_to item.display_title, video_path(item.video)
-                %td
-                  = button_to "Play", nil, class: "btn btn-default"
-                %td= item.rating
-                %td
-                  = link_to item.display_genre, category_path(item.video.category) 
-                %td
-                  = link_to queue_item_path(item), method: :delete do
-                    %i.glyphicon.glyphicon-remove
-        = button_to "Update Instant Queue", nil, class: "btn btn-default"
+                %th(width="10%") List Order
+                %th(width="30%") Video Title
+                %th(width="10%") Play
+                %th(width="20%") Rating
+                %th(width="15%") Genre
+                %th(width="15%") Remove
+            %tbody
+              - @queue_items.each do |item|
+                %tr
+                  %td
+                    = hidden_field_tag :"queue_items[][id]", "#{item.id}"
+                    = f.text_field :"queue_items[][order]", hide_label: :true, value: "#{item.order}", data: {video_id: item.video.id}
+                  %td
+                    = link_to item.display_title, video_path(item.video)
+                  %td
+                    = button_to "Play", nil, class: "btn btn-default"
+                  %td
+                    = f.select(:'queue_items[][rating]', options_for_video_rating, hide_label: true, include_blank: true, selected: item.rating) 
+                  %td
+                    = link_to item.display_genre, category_path(item.video.category) 
+                  %td
+                    = link_to queue_item_path(item), method: :delete do
+                      %i.glyphicon.glyphicon-remove
+          = f.submit 'Update Queue'
