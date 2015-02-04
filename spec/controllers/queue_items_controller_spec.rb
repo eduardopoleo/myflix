@@ -4,7 +4,7 @@ describe QueueItemsController do
   describe 'GET index' do
     context 'With authenticated users' do
       let (:current_user ) {Fabricate(:user)} 
-      before {set_current_user_id(current_user)}
+      before {set_current_user(current_user)}
 
       it 'sets the @queue_items variable' do
         video1 = Fabricate(:video)
@@ -29,7 +29,7 @@ describe QueueItemsController do
   describe 'POST create' do
     context 'Authenticated users' do
       let(:current_user) {Fabricate(:user)}
-      before {set_current_user_id(current_user)}
+      before {set_current_user(current_user)}
 
       it 'redirects to the queue page' do
         video = Fabricate(:video)
@@ -79,7 +79,7 @@ describe QueueItemsController do
   describe 'DELETE destroy' do
     context 'Authenticated user' do
       let(:current_user) {Fabricate(:user)}
-      before {set_current_user_id(current_user)}      
+      before {set_current_user(current_user)}      
 
       it 'redirects to my queue page' do
         video = Fabricate(:video)
@@ -119,14 +119,15 @@ describe QueueItemsController do
 end
 
   describe 'POST update queue items' do
+    let(:user) {Fabricate(:user)}
+    before {set_current_user(user)}     
+
     context 'with valid inputs' do
-      let(:user) {Fabricate(:user)}
       let(:futurama) {Fabricate(:video)}
       let(:monk) {Fabricate(:video)}
       let(:queue_item1) {Fabricate(:queue_item, user: user, order: 1, video: futurama)}
       let(:queue_item2) {Fabricate(:queue_item, user: user, order: 2, video: futurama)}
 
-      before {set_current_user_id(user)}     
 
       it 'redirects to the my queue page' do
         post :update_queue, queue_items: [{id: queue_item1.id, order: 2}, {id: queue_item2.id, order: 1}]
@@ -145,13 +146,11 @@ end
     end
 
     context 'with invalid inputs' do
-      let(:user){Fabricate(:user)}
       let(:futurama){Fabricate(:video)}
       let(:monk){Fabricate(:video)}
       let(:queue_item1) {Fabricate(:queue_item, user: user, order:1, video: futurama)}
       let(:queue_item2) {Fabricate(:queue_item, user: user, order:2, video: futurama)}
       let(:queue_item3) {Fabricate(:queue_item, user: user, order:3, video: monk)}
-      before {set_current_user_id(user)}
 
       it 'redirects to the my queue page'do
         post :update_queue, queue_items: [{id: queue_item1.id, order: 4.5}, {id: queue_item2.id, order: 2},{id: queue_item3.id, order: 3}]
@@ -171,14 +170,10 @@ end
 
     context 'with queue items that do not belong to the current user'do
       it 'does not change the queue item' do
-        user = Fabricate(:user)
-        set_current_user_id(user)
         user2 = Fabricate(:user)
         futurama = Fabricate(:video)
-        monk = Fabricate(:video)
-        queue_item1 = Fabricate(:queue_item, user: user, order: 1, video: futurama)
         queue_item2 = Fabricate(:queue_item, user: user2, order: 2, video: futurama)
-        post :update_queue, queue_items: [{id: queue_item1.id, order: 5}, {id: queue_item2.id, order: 3}]
+        post :update_queue, queue_items: [{id: queue_item2.id, order: 3}]
         expect(queue_item2.reload.order).to eq(2)
       end
     end

@@ -12,6 +12,7 @@ describe ReviewsController do
         before do
           post :create, review: Fabricate.attributes_for(:review), video_id: video.id
         end
+
         it 'creates a review' do
           expect(Review.count).to eq(1)
         end
@@ -44,6 +45,7 @@ describe ReviewsController do
           post :create, review: {rating:4}, video_id: video.id
           expect(assigns(:video)).to eq(video)
         end
+
         it 'sets the variable @reviews' do
           #these are already existent review (not the one to be created)
           review1 = Fabricate(:review, video: video)
