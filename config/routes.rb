@@ -21,8 +21,10 @@ Myflix::Application.routes.draw do
   resources :categories, only: [:show]
 
   resources :users, only: [:new, :show, :create] do
-    resources :followings, only: [:index, :create, :destroy]
+    resources :followings, only: [:index]
   end
+  #This is called Shallow Nesting
+  resources :followings, only: [:create, :destroy]
 
   resources :queue_items, only: [:index, :create, :destroy]
   post 'update_queue', to: 'queue_items#update_queue'
