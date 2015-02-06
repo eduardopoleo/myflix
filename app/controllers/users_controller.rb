@@ -11,13 +11,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(set_params)
-
     if @user.save
+      AppMailer.welcome_email(@user).deliver
       redirect_to home_path
     else
       render :new
     end
-
   end
 
   private
