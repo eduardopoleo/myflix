@@ -30,7 +30,7 @@ describe FollowingsController do
       following1 = Fabricate(:following, user_id: alice.id, subject_id: jose.id)
       following2 = Fabricate(:following, user_id: alice.id, subject_id: carlos.id)
       get :index, user_id: alice.id
-      expect(assigns(:followings)).to match_array([following2, following1])
+      expect(assigns(:followings)).to eq([following2, following1])
     end
 
     it_behaves_like 'require_sign_in' do
@@ -101,13 +101,6 @@ describe FollowingsController do
   describe 'DELETE destroy' do
     let(:alice) {Fabricate(:user)}
     before{session[:user_id] = alice.id}
-
-    it 'sets the following to be destroyed' do
-      joe  = Fabricate(:user)
-      following = Fabricate(:following, user_id: alice.id, subject_id: joe.id)
-      delete :destroy, id: following.id 
-      expect(assigns(:following)).to eq(following)
-    end
 
     it 'destroy the following' do
       joe  = Fabricate(:user)
