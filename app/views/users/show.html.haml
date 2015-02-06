@@ -5,7 +5,9 @@
         %header
           %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('eduardopoleo@gmail.com'.downcase)}?s=40")
           %h2 #{@user.full_name}'s video collections (#{@user.queue_items.size})
-          %button.btn.btn-default Follow
+          - unless current_user == @user || current_user.followings.map(&:subject).include?(@user)
+            = link_to followings_path(subject_id: @user.id), method: :post do
+              %button.btn.btn-default Follow
         %table.table
           %thead
             %tr

@@ -6,6 +6,10 @@ def clear_session
   session[:user_id] = nil
 end
 
+def click_video_on_homepage(video)
+  find("a[href='/videos/#{video.id}']").click
+end
+
 def sign_in(a_user = nil)
   user = a_user || Fabricate(:user)
   visit signin_path
