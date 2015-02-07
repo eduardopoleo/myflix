@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :followings, -> { order('created_at desc') }
   has_many :subjects, through: :followings
 
+  before_create :generate_token
+
   def queue_items_count
     queue_items.count + 1
   end
@@ -19,5 +21,10 @@ class User < ActiveRecord::Base
     queue_items.each_with_index do |queue_item, index| 
       queue_item.update_attributes(order: index + 1)
     end
+  end
+
+  private
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
   end
 end

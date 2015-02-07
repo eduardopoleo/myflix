@@ -37,6 +37,32 @@ describe UsersController do
         response.should render_template :new
       end
     end
+    
+    context 'sending emails' do
+      after{ActionMailer::Base.deliveries.clear}
+      it 'sends out email with valid input' do
+        post :create, user: Fabricate.attributes_for(:user)
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+
+      it 'sends out to the right recipient' do
+       post :create, user: Fabricate.attributes_for(:user)
+       message =  ActionMailer::Base.deliveries.last
+       message.to.should == [User.first.email]
+      end
+
+      it 'has the right content' do
+       post :create, user: Fabricate.attributes_for(:user)
+       message =  ActionMailer::Base.deliveries.last
+       message.body.should include("#{User.first.full_name}") 
+      end
+
+      it 'does not send out email with invalid input' do
+       post :create, user: {email: "", password: "someting", full_name: 'Joe'} 
+       message =  ActionMailer::Base.deliveries
+       expect(message).to be_empty
+      end
+    end
   end
 
   describe 'GET show' do

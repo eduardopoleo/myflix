@@ -10,4 +10,9 @@ describe User do
   it {should have_many(:queue_items).order(:order)}
   it {should have_many(:followings).order('created_at desc')}
   it {should have_many(:subjects)}
+
+  it "generates a ramdon token when the user is created" do
+    alice = Fabricate(:user)
+    expect(alice.token).to be_present
+  end
 end
