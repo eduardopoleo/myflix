@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
     user = User.where(token: params[:token]).first
     if user
       user.password = params[:password]
-      user.generate_token
+      user.token = SecureRandom.urlsafe_base64
       user.save
       flash[:notice] = "Your password has been reset"
       redirect_to signin_path
