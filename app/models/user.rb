@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :queue_items, -> { order(:order) }
   has_many :followings, -> { order('created_at desc') }
   has_many :subjects, through: :followings
+  has_many :invitations
 
   before_create :generate_token
 

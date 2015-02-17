@@ -1,0 +1,7 @@
+%html(lang="en-US")
+  %body
+    %p Hello, #{@guest_name},
+    %p #{@user.full_name} has invited you to join us at Myflix
+
+    %p #{@message}
+    %p= link_to "Join us!", invited_user_url(@token), method: :post 

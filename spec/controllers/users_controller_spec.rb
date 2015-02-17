@@ -84,4 +84,23 @@ describe UsersController do
       expect(response).to render_template :show
     end
   end
+
+  describe 'POST invited_user' do
+    let(:invitation) {Fabricate(:invitation)}
+
+    it 'sets the new user instance variable with the invitation instance variables' do
+      get :invited_user, token: invitation.token
+      expect(assigns(:user).email).to eq(invitation.guest_email) 
+    end
+
+    it 'sets token variable' do
+      get :invited_user, token: invitation.token
+      expect(assigns(:token)).to eq(invitation.token)
+    end
+
+    it 'renders the new template' do
+      get :invited_user, token: invitation.token
+      expect(response).to render_template(:new)
+    end
+  end
 end

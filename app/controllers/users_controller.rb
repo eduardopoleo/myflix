@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def invited_user
+    @token = params[:token]
+    invitation =  Invitation.find_by_token(@token)
+    @user = User.new(email: invitation.guest_email)
+    render :new
+  end
+
   private
   def set_params
     params.require(:user).permit!
