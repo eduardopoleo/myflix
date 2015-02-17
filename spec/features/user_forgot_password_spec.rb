@@ -20,6 +20,8 @@ feature 'User forgot another user' do
     fill_in('Password', :with => 'password')
     click_button('Sign in')
     expect(page).to have_content(alice.full_name)
+
+    clear_email
   end
 
   def navigate_to_signin

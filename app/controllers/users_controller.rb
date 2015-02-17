@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(set_params)
     if @user.save
+      if params[:token]
+        setup_user_guest_followings
+      end
       AppMailer.welcome_email(@user).deliver
       redirect_to home_path
     else
@@ -29,5 +32,12 @@ class UsersController < ApplicationController
   private
   def set_params
     params.require(:user).permit!
+  end
+
+  def setup_user_guest_followings
+    invitation = Invitation.where(token: params[:token]).first
+    invitation.user.subjects << @user
+    @user.subjects << invitation.user
+    invitation.update_attribute(:token, nil)
   end
 end

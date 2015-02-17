@@ -3,7 +3,7 @@ Myflix::Application.routes.draw do
 
   get 'ui(/:action)', controller: 'ui'
   get 'home', to: 'videos#index', as: 'home'
-  post 'register', to: 'users#new'
+  get 'register', to: 'users#new'
 
   #Sessions routes
   get 'signin', to: 'sessions#new'
