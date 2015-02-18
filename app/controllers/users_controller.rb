@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       if params[:token]
         setup_user_guest_followings
       end
-      AppMailer.welcome_email(@user).deliver
+      AppMailer.delay.welcome_email(@user)
       redirect_to home_path
     else
       render :new
