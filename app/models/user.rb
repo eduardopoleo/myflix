@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :followings, -> { order('created_at desc') }
   has_many :subjects, through: :followings
   has_many :invitations
+  
+  def admin?
+    admin
+  end
 
   def queue_items_count
     queue_items.count + 1
