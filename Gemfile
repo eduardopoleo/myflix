@@ -20,7 +20,6 @@ gem 'paratrooper'
 
 group :development do
   gem 'thin'
-  gem "better_errors"
   gem "binding_of_caller"
   gem "letter_opener"
 end
