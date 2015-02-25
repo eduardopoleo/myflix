@@ -17,6 +17,7 @@ gem 'sidekiq'
 gem 'unicorn'
 gem "sentry-raven"
 gem 'paratrooper'
+gem 'carrierwave'
 
 group :development do
   gem 'thin'
