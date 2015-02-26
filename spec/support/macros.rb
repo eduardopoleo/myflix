@@ -22,6 +22,12 @@ def sign_in(a_user = nil)
   click_button 'Sign in'
 end
 
+
+def sign_in_integration_test(a_user = nil) 
+  user = a_user || Fabricate(:user)
+  session[:user_id] = user.id
+end
+
 def sign_out 
   click_link('Sign Out')
 end
