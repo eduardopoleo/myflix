@@ -10,6 +10,8 @@ Myflix::Application.routes.draw do
   post 'signin', to: 'sessions#create' 
   get 'signout', to: 'sessions#destroy'
 
+  resources :charges, only: [:create]
+
 
   namespace :admin do
     resource :videos, only: [:new, :create]
