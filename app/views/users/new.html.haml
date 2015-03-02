@@ -1,7 +1,7 @@
 = content_for :head do 
   %script{:src => "https://js.stripe.com/v2/", :type => "text/javascript"}
   :javascript
-    Stripe.setPublishableKey('pk_test_XLSZT1qESCJZ6NHJ3L7ms3Nm');
+    Stripe.setPublishableKey("#{ENV['PUBLISHABLE_KEY']}");
   = javascript_include_tag 'payment'
 
 %section.register.container
@@ -16,7 +16,7 @@
           = f.text_field :full_name, label: "Full Name"
           = hidden_field_tag 'token', @token if @token
         %fieldset.credit_card
-          %span.payment-errors
+          %span.payment-error
           .form-group
             %label.control-label.col-sm-2 Credit Card Number
             .col-sm-6
