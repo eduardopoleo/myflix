@@ -13,24 +13,14 @@ class UsersController < ApplicationController
     @user = User.new(set_params)
     if @user.save
       handle_invitation
-      begin
-        customer = Stripe::Customer.create(
-            :email => 'example@stripe.com',
-            :card  => params[:stripeToken]
-        )
-
-        charge = Stripe::Charge.create(
-            :customer    => customer.id,
-            :amount      => 999,
-            :description => "Payment for #{@user.email}",
-            :currency    => 'usd'
-        )
-      rescue Stripe::CardError => e
-        flash[:error] = e.message
+      charge = StripeWrapper::Charge.create( :card => params[:stripeToken], :amount => 999, :description => "Payment for #{@user.email}", )
+      if charge.successful?
+        AppMailer.delay.welcome_email(@user)
+        redirect_to home_path
+      else
+        flash[:error] = charge.error
         return redirect_to register_path
       end
-      AppMailer.delay.welcome_email(@user)
-      redirect_to home_path
     else
       render :new
     end

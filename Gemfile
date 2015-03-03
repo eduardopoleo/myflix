@@ -22,6 +22,8 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'fog'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'figaro'
+
 
 group :development do
   gem 'thin'
@@ -41,6 +43,8 @@ group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'launchy'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :production do
