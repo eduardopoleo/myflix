@@ -11,10 +11,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(set_params)
-    if @user.save
+    if @user.valid?
       handle_invitation
-      charge = StripeWrapper::Charge.create( :card => params[:stripeToken], :amount => 999, :description => "Payment for #{@user.email}", )
+      charge = StripeWrapper::Charge.create( :card => params[:stripeToken], :amount => 999, :description => "Payment for #{@user.email}" )
       if charge.successful?
+        @user.save
         AppMailer.delay.welcome_email(@user)
         redirect_to home_path
       else

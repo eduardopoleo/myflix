@@ -27,6 +27,10 @@ feature 'User invites friend to sign up in myflix' do
     current_email.click_link('Join us!')
     fill_in('Password', :with => 'password')
     fill_in('Full Name', :with => 'Joe Vargas')
+    fill_in("Credit Card Number", :with => '4242424242424242')
+    fill_in("Security Code", :with => '123')
+    select("7 - July", :from  => "exp-month" )
+    select("2017", :from  => "exp-year" )
     click_button('Sign Up')
   end
   
