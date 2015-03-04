@@ -25,6 +25,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'figaro'
 
 
+
 group :development do
   gem 'thin'
   gem "binding_of_caller"
@@ -45,6 +46,7 @@ group :test do
   gem 'launchy'
   gem 'webmock'
   gem 'vcr'
+  gem 'selenium-webdriver'
 end
 
 group :production do

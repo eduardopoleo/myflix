@@ -29,7 +29,7 @@ def sign_in_integration_test(a_user = nil)
 end
 
 def sign_out 
-  click_link('Sign Out')
+  visit signout_path
 end
 
 
