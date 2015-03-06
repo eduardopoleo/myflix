@@ -30,7 +30,7 @@ describe StripeWrapper::Charge do
       expect(response).not_to be_successful
     end
 
-    it 'sets an error message', :vcr do
+    it 'sets an error message' do
       response = StripeWrapper::Charge.create(amount: 300, card: token)
       expect(response.error).to eq('Your card was declined.')
     end

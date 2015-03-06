@@ -26,8 +26,9 @@ describe UsersController do
         end
 
         it 'creates the user ' do
-          post :create, user: Fabricate.attributes_for(:user)
-          User.count.should == 1
+          expect { post :create, user: Fabricate.attributes_for(:user) }.to change { User.count }.by 1
+          # post :create, user: Fabricate.attributes_for(:user)
+          # User.count.should == 1
         end
 
         it 'redirects to the home_path' do
@@ -38,21 +39,27 @@ describe UsersController do
         it 'if there is token the user should follow the guest' do
           alice = Fabricate(:user)
           invitation = Fabricate(:invitation, user: alice)
-          post :create, user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"}, token: invitation.token
+          post :create,
+               user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"},
+               token: invitation.token
           expect(alice.subjects.first).to eq(User.find_by_email(invitation.guest_email))
         end
 
         it 'if there is token the guest should follow the user who invited' do
           alice = Fabricate(:user)
           invitation = Fabricate(:invitation, user: alice)
-          post :create, user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"}, token: invitation.token
+          post :create,
+               user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"}, 
+               token: invitation.token
           expect(User.find_by_email(invitation.guest_email).subjects.first).to eq(alice)
         end
 
         it 'should set the inviation token to nil after the guest signs up' do
           alice = Fabricate(:user)
           invitation = Fabricate(:invitation, user: alice)
-          post :create, user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"}, token: invitation.token
+          post :create,
+               user: {email: invitation.guest_email, full_name: invitation.guest_name, password: "password"}, 
+               token: invitation.token
           expect(invitation.reload.token).to eq(nil)
         end
       end

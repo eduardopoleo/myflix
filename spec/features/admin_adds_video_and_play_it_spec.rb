@@ -9,12 +9,12 @@ feature 'Admins interacts with the videos' do
 
    sign_in(admin) 
    visit new_admin_videos_path
-   fill_in "Title", :with =>'Some title'  
-   select('Dramas', :from => 'Category')
-   fill_in "Description", :with =>'Some short but sweet Description'  
+   fill_in "Title", with: 'Some title'  
+   select('Dramas', from: 'Category')
+   fill_in "Description", with: 'Some short but sweet Description'  
    attach_file 'Large cover', 'spec/support/uploads/large_monk.jpg'
    attach_file 'Small cover', 'spec/support/uploads/monk.jpg'
-   fill_in "Video url", :with =>'http://www.example.com/my_video.mp4'  
+   fill_in "Video url", with: 'http://www.example.com/my_video.mp4'  
    click_button 'Add Video'
 
    sign_out
