@@ -16,7 +16,7 @@ describe StripeWrapper::Charge do
   context "with valid credit card" do
     let(:card_number) {'4242424242424242'} 
 
-    it "charges the card sucessfully", :vcr do
+    it "charges the card successfully", :vcr do
       response = StripeWrapper::Charge.create(amount: 300, card: token)
       expect(response).to be_successful
     end

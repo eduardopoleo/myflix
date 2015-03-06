@@ -19,7 +19,9 @@ describe UsersController do
       context 'with valid payment input' do
         before do
           charge = double('charge')
-          StripeWrapper::Charge.stub(:create).and_return(charge)
+          StripeWrapper::Charge.should_receive(:create).and_return(charge)
+          #calling stub implies that calling :create is optional, but in this case it is mandatory.
+          # setting the should_receive expectation ensures that this actually takes place
           charge.stub(:successful?).and_return(true)
         end
 
@@ -63,7 +65,7 @@ describe UsersController do
           charge.stub(:error).and_return("Your card was declined.")
         end
 
-        it 'does not save the record' do
+        it 'does not create a new user the record' do
           post :create, user: Fabricate.attributes_for(:user)
           expect(User.count).to eq(0)
         end
@@ -89,6 +91,10 @@ describe UsersController do
       it 'renders the new template' do
         response.should render_template :new
       end
+
+      it 'it does not charge the card' do
+        StripeWrapper::Charge.should_not_receive(:create)
+      end
     end
     
     context 'sending emails' do
@@ -96,10 +102,9 @@ describe UsersController do
       context "with valid input" do
         before do
           charge = double('charge')
-          StripeWrapper::Charge.stub(:create).and_return(charge)
+          StripeWrapper::Charge.should_receive(:create).and_return(charge)
           charge.stub(:successful?).and_return(true)
         end
-
 
         it 'sends out email with valid input' do
           post :create, user: Fabricate.attributes_for(:user)
