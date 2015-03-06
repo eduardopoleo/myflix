@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.new(set_params)
     if @user.valid?
       handle_invitation
