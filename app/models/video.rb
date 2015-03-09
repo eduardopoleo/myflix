@@ -10,6 +10,10 @@ class Video < ActiveRecord::Base
   def self.search_by_title(search_word)
     where('LOWER(title) LIKE ?', "%#{search_word.downcase}%").order('created_at DESC')
   end
+
+  def decorator
+    VideoDecorator.new(self)
+  end
  
   def rating_average 
     if reviews.size == 0

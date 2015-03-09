@@ -14,7 +14,11 @@ module StripeWrapper
     
     def self.create(options={})
       begin
-        response = Stripe::Charge.create(customer: options[:customer], amount: options[:amount], description: options[:description], currency: 'usd', card: options[:card])
+        response = Stripe::Charge.create(customer: options[:customer],
+                                         amount: options[:amount],
+                                         description: options[:description], 
+                                         currency: 'usd',
+                                         card: options[:card])
         new(response, :success)
         #This is the same as saying Charge.new, since this is a class method there is no need to write it explicitly  
       rescue Stripe::CardError => e
