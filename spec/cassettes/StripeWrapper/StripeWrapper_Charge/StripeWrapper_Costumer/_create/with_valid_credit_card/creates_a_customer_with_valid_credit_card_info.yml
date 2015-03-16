@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/customers
+    uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: email=joe%40gmail.com&card=tok_15h27HKoSw2hrlQeUgj5BTld&plan=regular
+      string: card[number]=4242424242424242&card[exp_month]=3&card[exp_year]=2016&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         eduardo-Inspiron-3537 3.13.0-46-generic #79-Ubuntu SMP Tue Mar 10 20:08:14
         UTC 2015 i686 i686 i686 GNU/Linux"}'
       Content-Length:
-      - '68'
+      - '81'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 16 Mar 2015 17:35:04 GMT
+      - Mon, 16 Mar 2015 17:11:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2323'
+      - '726'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,97 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_LYBF2lVzZeMrimai
+      - req_VA4xQkClpCjFfGIX
+      Stripe-Version:
+      - '2015-02-18'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_15h1k2KoSw2hrlQerjmBFCHU",
+          "livemode": false,
+          "created": 1426525862,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_15h1k2KoSw2hrlQeAhj6U5Tm",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 3,
+            "exp_year": 2016,
+            "fingerprint": "yVufS9dNGxll2kqT",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "dynamic_last4": null
+          },
+          "client_ip": "70.49.170.83"
+        }
+    http_version: 
+  recorded_at: Mon, 16 Mar 2015 17:11:02 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: US-ASCII
+      string: email=ana%40weimannthompson.name&card=tok_15h1k2KoSw2hrlQerjmBFCHU&plan=regular
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.1
+      Authorization:
+      - Bearer sk_test_xfU7xy3kwkAkXxGSIv1kRs8S
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.4 p265 (2014-10-27)","platform":"i686-linux","publisher":"stripe","uname":"Linux
+        eduardo-Inspiron-3537 3.13.0-46-generic #79-Ubuntu SMP Tue Mar 10 20:08:14
+        UTC 2015 i686 i686 i686 GNU/Linux"}'
+      Content-Length:
+      - '79'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 16 Mar 2015 17:11:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2334'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_nve3EqkNj3gEHRA6
       Stripe-Version:
       - '2015-02-18'
       Strict-Transport-Security:
@@ -59,21 +149,21 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1426527303,
-          "id": "cus_5sni0qvYymxNUI",
+          "created": 1426525862,
+          "id": "cus_5snKb7sUzlKPq5",
           "livemode": false,
           "description": null,
-          "email": "joe@gmail.com",
+          "email": "ana@weimannthompson.name",
           "delinquent": false,
           "metadata": {},
           "subscriptions": {
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_5sni0qvYymxNUI/subscriptions",
+            "url": "/v1/customers/cus_5snKb7sUzlKPq5/subscriptions",
             "data": [
               {
-                "id": "sub_5sniAZ5tzxd181",
+                "id": "sub_5snKhafmSOYbe6",
                 "plan": {
                   "interval": "month",
                   "name": "Myflix regular subscription",
@@ -89,12 +179,12 @@ http_interactions:
                   "statement_descriptor": "Myflix fee"
                 },
                 "object": "subscription",
-                "start": 1426527303,
+                "start": 1426525862,
                 "status": "active",
-                "customer": "cus_5sni0qvYymxNUI",
+                "customer": "cus_5snKb7sUzlKPq5",
                 "cancel_at_period_end": false,
-                "current_period_start": 1426527303,
-                "current_period_end": 1429205703,
+                "current_period_start": 1426525862,
+                "current_period_end": 1429204262,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -114,16 +204,16 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_5sni0qvYymxNUI/sources",
+            "url": "/v1/customers/cus_5snKb7sUzlKPq5/sources",
             "data": [
               {
-                "id": "card_15h27GKoSw2hrlQeApTkFF5f",
+                "id": "card_15h1k2KoSw2hrlQeAhj6U5Tm",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
-                "exp_month": 7,
-                "exp_year": 2017,
+                "exp_month": 3,
+                "exp_year": 2016,
                 "fingerprint": "yVufS9dNGxll2kqT",
                 "country": "US",
                 "name": null,
@@ -138,12 +228,12 @@ http_interactions:
                 "address_zip_check": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_5sni0qvYymxNUI"
+                "customer": "cus_5snKb7sUzlKPq5"
               }
             ]
           },
-          "default_source": "card_15h27GKoSw2hrlQeApTkFF5f"
+          "default_source": "card_15h1k2KoSw2hrlQeAhj6U5Tm"
         }
     http_version: 
-  recorded_at: Mon, 16 Mar 2015 17:35:04 GMT
+  recorded_at: Mon, 16 Mar 2015 17:11:03 GMT
 recorded_with: VCR 2.9.3

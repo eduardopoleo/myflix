@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&description=Payment%20for%20joe%40gmail.com&currency=usd&card=tok_15d9XTKoSw2hrlQeDU8KSW4Z
+      string: email=joe%40gmail.com&card=tok_15h29xKoSw2hrlQesht1JNc1&plan=regular
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -19,10 +19,10 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.20.1","lang":"ruby","lang_version":"2.1.4 p265 (2014-10-27)","platform":"i686-linux","publisher":"stripe","uname":"Linux
-        eduardo-Inspiron-3537 3.13.0-45-generic #74-Ubuntu SMP Tue Jan 13 19:37:48
+        eduardo-Inspiron-3537 3.13.0-46-generic #79-Ubuntu SMP Tue Mar 10 20:08:14
         UTC 2015 i686 i686 i686 GNU/Linux"}'
       Content-Length:
-      - '101'
+      - '68'
   response:
     status:
       code: 402
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 06 Mar 2015 00:42:04 GMT
+      - Mon, 16 Mar 2015 17:37:50 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '162'
+      - '117'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_b6lI3FJMCDxjokhO
+      - req_fxhCbCYUL3n6i0ga
       Stripe-Version:
       - '2015-02-18'
     body:
@@ -59,10 +59,9 @@ http_interactions:
           "error": {
             "message": "Your card was declined.",
             "type": "card_error",
-            "code": "card_declined",
-            "charge": "ch_15d9XUKoSw2hrlQei5NIcSCt"
+            "code": "card_declined"
           }
         }
     http_version: 
-  recorded_at: Fri, 06 Mar 2015 00:42:04 GMT
+  recorded_at: Mon, 16 Mar 2015 17:37:50 GMT
 recorded_with: VCR 2.9.3
