@@ -4,13 +4,13 @@ describe UsersController do
   describe 'GET new' do
     it 'sets the new object @user' do
       get :new
-      assigns(:user).should be_new_record
-      assigns(:user).should be_instance_of(User)
+      expect(assigns(:user)).to be_new_record
+      expect(assigns(:user)).to be_instance_of(User)
     end
 
     it 'renders the new template' do
       get :new
-      response.should render_template :new
+      expect(response).to render_template :new
     end
   end
 
