@@ -23,7 +23,7 @@ describe UsersController do
       end
 
       it 'redirects to the signin path' do
-        expect(response).to redirect_to signin_path
+        expect(response).to redirect_to home_path
       end
       
       it 'set a flash success message' do

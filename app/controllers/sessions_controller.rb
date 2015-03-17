@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    flash[:success] = "Hey there! To try the admin options (upload cover pictures, check payments, etc) use 'admin@myflix.ca' and 'password'"
     if logged_in?
       redirect_to home_path
     end
