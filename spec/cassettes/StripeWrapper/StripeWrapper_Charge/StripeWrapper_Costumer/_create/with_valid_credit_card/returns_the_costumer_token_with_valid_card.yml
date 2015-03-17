@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 17 Mar 2015 17:15:25 GMT
+      - Tue, 17 Mar 2015 16:48:30 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_2PRfMPUi7CNXN1C1
+      - req_iIQ2Cr9PTm3H265i
       Stripe-Version:
       - '2015-02-18'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_15hOHpKoSw2hrlQepCEYNXii",
+          "id": "tok_15hNrmKoSw2hrlQeE7YCbNwQ",
           "livemode": false,
-          "created": 1426612525,
+          "created": 1426610910,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_15hOHpKoSw2hrlQesUsFYp2Y",
+            "id": "card_15hNrmKoSw2hrlQePg4wOvvr",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -89,13 +89,13 @@ http_interactions:
           "client_ip": "70.49.170.83"
         }
     http_version: 
-  recorded_at: Tue, 17 Mar 2015 17:15:25 GMT
+  recorded_at: Tue, 17 Mar 2015 16:48:30 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=300&currency=usd&card=tok_15hOHpKoSw2hrlQepCEYNXii
+      string: email=ike_huels%40stanton.biz&card=tok_15hNrmKoSw2hrlQeE7YCbNwQ&plan=regular
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -112,7 +112,7 @@ http_interactions:
         eduardo-Inspiron-3537 3.13.0-46-generic #79-Ubuntu SMP Tue Mar 10 20:08:14
         UTC 2015 i686 i686 i686 GNU/Linux"}'
       Content-Length:
-      - '57'
+      - '76'
   response:
     status:
       code: 200
@@ -121,11 +121,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 17 Mar 2015 17:15:25 GMT
+      - Tue, 17 Mar 2015 16:48:31 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1340'
+      - '2331'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -139,7 +139,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_DZe9pSFZ1sf1EODM
+      - req_6R85doWiO7MEFVSf
       Stripe-Version:
       - '2015-02-18'
       Strict-Transport-Security:
@@ -148,62 +148,92 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_15hOHpKoSw2hrlQedqK2HCSN",
-          "object": "charge",
-          "created": 1426612525,
+          "object": "customer",
+          "created": 1426610911,
+          "id": "cus_5tACh17oWKeJ4I",
           "livemode": false,
-          "paid": true,
-          "status": "succeeded",
-          "amount": 300,
-          "currency": "usd",
-          "refunded": false,
-          "source": {
-            "id": "card_15hOHpKoSw2hrlQesUsFYp2Y",
-            "object": "card",
-            "last4": "4242",
-            "brand": "Visa",
-            "funding": "credit",
-            "exp_month": 3,
-            "exp_year": 2016,
-            "fingerprint": "yVufS9dNGxll2kqT",
-            "country": "US",
-            "name": null,
-            "address_line1": null,
-            "address_line2": null,
-            "address_city": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_country": null,
-            "cvc_check": "pass",
-            "address_line1_check": null,
-            "address_zip_check": null,
-            "dynamic_last4": null,
-            "metadata": {},
-            "customer": null
-          },
-          "captured": true,
-          "balance_transaction": "txn_15hOHpKoSw2hrlQe6YkxKUmU",
-          "failure_message": null,
-          "failure_code": null,
-          "amount_refunded": 0,
-          "customer": null,
-          "invoice": null,
           "description": null,
-          "dispute": null,
+          "email": "ike_huels@stanton.biz",
+          "delinquent": false,
           "metadata": {},
-          "statement_descriptor": null,
-          "fraud_details": {},
-          "receipt_email": null,
-          "receipt_number": null,
-          "shipping": null,
-          "refunds": {
+          "subscriptions": {
             "object": "list",
-            "total_count": 0,
+            "total_count": 1,
             "has_more": false,
-            "url": "/v1/charges/ch_15hOHpKoSw2hrlQedqK2HCSN/refunds",
-            "data": []
-          }
+            "url": "/v1/customers/cus_5tACh17oWKeJ4I/subscriptions",
+            "data": [
+              {
+                "id": "sub_5tACecLLDrRAgc",
+                "plan": {
+                  "interval": "month",
+                  "name": "Myflix regular subscription",
+                  "created": 1426518765,
+                  "amount": 999,
+                  "currency": "usd",
+                  "id": "regular",
+                  "object": "plan",
+                  "livemode": false,
+                  "interval_count": 1,
+                  "trial_period_days": null,
+                  "metadata": {},
+                  "statement_descriptor": "Myflix fee"
+                },
+                "object": "subscription",
+                "start": 1426610911,
+                "status": "active",
+                "customer": "cus_5tACh17oWKeJ4I",
+                "cancel_at_period_end": false,
+                "current_period_start": 1426610911,
+                "current_period_end": 1429289311,
+                "ended_at": null,
+                "trial_start": null,
+                "trial_end": null,
+                "canceled_at": null,
+                "quantity": 1,
+                "application_fee_percent": null,
+                "discount": null,
+                "tax_percent": null,
+                "metadata": {}
+              }
+            ]
+          },
+          "discount": null,
+          "account_balance": 0,
+          "currency": "usd",
+          "sources": {
+            "object": "list",
+            "total_count": 1,
+            "has_more": false,
+            "url": "/v1/customers/cus_5tACh17oWKeJ4I/sources",
+            "data": [
+              {
+                "id": "card_15hNrmKoSw2hrlQePg4wOvvr",
+                "object": "card",
+                "last4": "4242",
+                "brand": "Visa",
+                "funding": "credit",
+                "exp_month": 3,
+                "exp_year": 2016,
+                "fingerprint": "yVufS9dNGxll2kqT",
+                "country": "US",
+                "name": null,
+                "address_line1": null,
+                "address_line2": null,
+                "address_city": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_country": null,
+                "cvc_check": "pass",
+                "address_line1_check": null,
+                "address_zip_check": null,
+                "dynamic_last4": null,
+                "metadata": {},
+                "customer": "cus_5tACh17oWKeJ4I"
+              }
+            ]
+          },
+          "default_source": "card_15hNrmKoSw2hrlQePg4wOvvr"
         }
     http_version: 
-  recorded_at: Tue, 17 Mar 2015 17:15:25 GMT
+  recorded_at: Tue, 17 Mar 2015 16:48:31 GMT
 recorded_with: VCR 2.9.3

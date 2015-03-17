@@ -7,7 +7,6 @@ feature 'User invites friend to sign up in myflix', {js: true, vcr: true} do
 
     user_sends_invitation
     guest_opens_email
-    guest_signs_in 
     guest_follows_user(alice) 
     user_follows_guest(alice)
     clear_email
@@ -34,13 +33,6 @@ feature 'User invites friend to sign up in myflix', {js: true, vcr: true} do
     click_button('Sign Up')
   end
   
-  def guest_signs_in
-    fill_in('email', with: 'joe@gmail.com')
-    fill_in('Password', with: 'password')
-    click_button('Sign in')
-    expect(page).to have_content('Welcome, Joe')
-  end
-
   def guest_follows_user(user)
     click_link("People")
     expect(page).to have_content(user.full_name)

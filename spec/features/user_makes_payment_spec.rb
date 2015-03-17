@@ -9,7 +9,7 @@ feature 'User Makes Payment', :vcr do
     fill_in_user_information('joe@gmail.com')
     fill_in_payment_information('4242424242424242')
     click_button('Sign Up')
-    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Joe')
   end
 
   scenario 'valid user info and invalid payment info',:js => true do

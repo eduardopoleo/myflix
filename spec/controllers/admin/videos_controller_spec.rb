@@ -38,7 +38,7 @@ describe Admin::VideosController do
         set_current_admin
         category = Fabricate(:category)
         post :create, video: {title: 'Some title', category_id: category.id, description: "some large description"}  
-        expect(response).to redirect_to new_admin_videos_path
+        expect(response).to redirect_to new_admin_video_path
      end
 
       it 'creates the video' do

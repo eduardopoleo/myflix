@@ -14,7 +14,8 @@ Myflix::Application.routes.draw do
 
 
   namespace :admin do
-    resource :videos, only: [:new, :create]
+    resources :videos, only: [:new, :create]
+    resources :payments, only: [:index]
   end
 
   resources :videos, only: [:show] do
@@ -45,4 +46,5 @@ Myflix::Application.routes.draw do
   resources :invitations, only: [:create] 
   get 'invite_friend', to: 'invitations#new' 
   get 'invitation/:token', to: 'users#invited_user', as: 'invited_user'
+  mount StripeEvent::Engine, at: '/stripe_events'
 end

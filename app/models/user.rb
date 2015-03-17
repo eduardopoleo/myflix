@@ -8,9 +8,14 @@ class User < ActiveRecord::Base
   has_many :followings, -> { order('created_at desc') }
   has_many :subjects, through: :followings
   has_many :invitations
+  has_many :payments
   
   def admin?
     admin
+  end
+
+  def deactivate!
+    update_attribute(:active, false)
   end
 
   def queue_items_count

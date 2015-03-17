@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 16 Mar 2015 16:44:38 GMT
+      - Tue, 17 Mar 2015 17:15:30 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_2Am2MIubVch2Qi63
+      - req_pXePGlzOQQxCnTf4
       Stripe-Version:
       - '2015-02-18'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_15h1KUKoSw2hrlQeGWOe0iyX",
+          "id": "tok_15hOHuKoSw2hrlQepTJAAAdm",
           "livemode": false,
-          "created": 1426524278,
+          "created": 1426612530,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_15h1KUKoSw2hrlQen2NcZcAP",
+            "id": "card_15hOHtKoSw2hrlQe80Ny2xov",
             "object": "card",
             "last4": "0002",
             "brand": "Visa",
@@ -89,13 +89,13 @@ http_interactions:
           "client_ip": "70.49.170.83"
         }
     http_version: 
-  recorded_at: Mon, 16 Mar 2015 16:44:38 GMT
+  recorded_at: Tue, 17 Mar 2015 17:15:30 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: email=christelle%40bednarmante.org&card=tok_15h1KUKoSw2hrlQeGWOe0iyX&plan=regular
+      string: email=lucious%40kirlinwatsica.info&card=tok_15hOHuKoSw2hrlQepTJAAAdm&plan=regular
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -121,7 +121,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 16 Mar 2015 16:44:39 GMT
+      - Tue, 17 Mar 2015 17:15:30 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -139,7 +139,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Nj3iX6bCDbTeg02V
+      - req_hqxDKaAxeUakrsUt
       Stripe-Version:
       - '2015-02-18'
     body:
@@ -153,5 +153,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 16 Mar 2015 16:44:39 GMT
+  recorded_at: Tue, 17 Mar 2015 17:15:30 GMT
 recorded_with: VCR 2.9.3

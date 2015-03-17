@@ -8,7 +8,7 @@ feature 'Admins interacts with the videos' do
    admin = Fabricate(:admin)
 
    sign_in(admin) 
-   visit new_admin_videos_path
+   visit new_admin_video_path
    fill_in "Title", with: 'Some title'  
    select('Dramas', from: 'Category')
    fill_in "Description", with: 'Some short but sweet Description'  

@@ -35,7 +35,7 @@ module StripeWrapper
     end
   end
 
-  class Costumer
+  class Customer
     attr_accessor :response, :status
 
     def initialize(response, status)
@@ -62,6 +62,10 @@ module StripeWrapper
 
     def error
       response.message
+    end
+
+    def customer_token
+      response.id
     end
   end
 end
