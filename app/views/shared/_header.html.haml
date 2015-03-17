@@ -8,7 +8,7 @@
       %li= link_to "People", user_followings_path(current_user) 
       %li= link_to "Invite", invite_friend_path 
       - if current_user.admin?
-        %li= link_to "Add Video", new_admin_videos_path
+        %li= link_to "Add Video", new_admin_video_path
     = form_tag search_videos_path, class: "col-md-5 navbar-form" do
       .form-group
         %input.form-control(type="text" name="search_word" placeholder="Search for videos here")

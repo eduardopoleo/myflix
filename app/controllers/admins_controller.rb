@@ -1,7 +1,11 @@
 class AdminsController < ApplicationController
-  before_action :ensure_admin
-
-  def ensure_admin
-    redirect_to root_path unless current_user.admin? 
+  before_action :require_admin
+   
+  private
+  def require_admin
+    if !current_user.admin?
+      flash[:error] = 'Sorry but you are not authorized to do that.'
+      redirect_to home_path
+    end
   end
 end
