@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :followings, -> { order('created_at desc') }
   has_many :subjects, through: :followings
   has_many :invitations
+  has_many :payments
   
   def admin?
     admin

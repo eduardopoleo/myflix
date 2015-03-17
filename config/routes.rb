@@ -45,4 +45,5 @@ Myflix::Application.routes.draw do
   resources :invitations, only: [:create] 
   get 'invite_friend', to: 'invitations#new' 
   get 'invitation/:token', to: 'users#invited_user', as: 'invited_user'
+  mount StripeEvent::Engine, at: '/stripe_events'
 end
