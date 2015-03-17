@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def deactivate!
+    update_attribute(:active, false)
+  end
+
   def queue_items_count
     queue_items.count + 1
   end

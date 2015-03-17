@@ -8,7 +8,7 @@ class Admin::VideosController < AdminsController
 
     if @video.save
       flash[:success] = "You have successfully created the video #{@video.title}"
-      redirect_to new_admin_videos_path
+      redirect_to new_admin_video_path
     else
       flash[:error] = "You video could not be created"
       render :new
